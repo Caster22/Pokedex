@@ -1,3 +1,9 @@
-.root {
+@import '../../../styles/settings.scss';
 
+.root {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: $footer-main;
+  color: $global-font-color;
 }

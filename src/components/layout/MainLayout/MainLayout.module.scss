@@ -1,5 +1,8 @@
+@import '../../../styles/settings.scss';
+
 .root {
   margin: auto;
-  background-color: aqua;
+  background-color: $background;
   padding-top: 200px;
+  height: 100vh;
 }
