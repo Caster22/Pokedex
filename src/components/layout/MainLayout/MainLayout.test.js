@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Header } from './Header';
+import  { MainLayout } from './MainLayout';
 
-describe('Header', () => {
+describe('MainLayout', () => {
   it('should render without crashing', function () {
-    shallow(<Header />);
+    shallow(<MainLayout />);
   });
-});
+})
