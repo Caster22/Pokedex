@@ -8,8 +8,13 @@ $base-size: 12px;
 $title-font: 'Sansita Swashed', cursive;
 $main-font: 'Open Sans', sans-serif;
 
-/* colors */
+/* global colors */
+$background: #596275;
+$global-font-color: #303952;
+$hover-color: yellow;
 
+/* header colors */
+$header-main: #778beb;
 
 /* Transition */
 $transition-background: .2s;

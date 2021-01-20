@@ -1,11 +1,25 @@
 import React from "react";
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import styles from './Header.module.scss';
 
 const Component = () => {
   return (
     <div className={ styles.root }>
-      Header
+      <div className='container'>
+        <div className='row pt-2'>
+          <div className={`col-6 text-left ` + styles.home }>
+            <a href='/'>Home</a>
+          </div>
+          <div className='col-6 text-right'>
+            <span className={styles.home}>Music</span>
+          </div>
+        </div>
+        <div className='row align-items-center pb-3'>
+          <div className={`col-12 text-center ` + styles.title }>
+            Your Special Pokédex!
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
