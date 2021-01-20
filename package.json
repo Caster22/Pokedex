@@ -11,6 +11,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
     "eslint-watch": "^7.0.0",
     "node-sass": "4.14.1",
     "prop-types": "^15.7.2",
