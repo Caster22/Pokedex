@@ -4,7 +4,7 @@ import styles from './Header.module.scss';
 
 const Component = () => {
   return (
-    <div className={ styles.root }>
+    <header className={ styles.root }>
       <div className='container'>
         <div className='row pt-2'>
           <div className={`col-6 text-left ` + styles.home }>
@@ -20,7 +20,7 @@ const Component = () => {
           </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 
