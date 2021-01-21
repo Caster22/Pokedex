@@ -1,3 +1,4 @@
+@import '../../../styles/settings.scss';
 .root {
 
 }
@@ -7,4 +8,22 @@
   height: 60vh;
   border-radius: 25px;
   position: relative;
+
+  .logo {
+    position: absolute;
+    transform: translate(-50%, 15%);
+    //filter: invert(100%);
+  }
+
+  .image_holder {
+    border: 3px solid;
+    border-radius: 10px;
+    background-color: #596275;
+    margin-top: 20%;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+  }
 }

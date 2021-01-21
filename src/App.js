@@ -13,6 +13,7 @@ const App = () => (
       <MainLayout>
         <Switch>
           <Route exact path='/' component={ Homepage } />
+          <Route exact path='/pokemon/:name' component={ Homepage } />
         </Switch>
       </MainLayout>
     </BrowserRouter>
