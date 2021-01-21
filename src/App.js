@@ -6,6 +6,7 @@ import './styles/global.scss';
 //import { store } from './redux/store.js';
 import { MainLayout } from './components/layout/MainLayout/MainLayout';
 import { Homepage } from './components/views/Homepage/Homepage';
+import { PokemonPage } from "./components/views/PokemonPage/PokemonPage";
 
 const App = () => (
   //<Provider store={ store }>
@@ -13,7 +14,7 @@ const App = () => (
       <MainLayout>
         <Switch>
           <Route exact path='/' component={ Homepage } />
-          <Route exact path='/pokemon/:name' component={ Homepage } />
+          <Route exact path='/pokemon/:name' component={ PokemonPage } />
         </Switch>
       </MainLayout>
     </BrowserRouter>
