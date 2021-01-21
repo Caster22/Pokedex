@@ -11,7 +11,7 @@ const Component = ({ data, leadingText }) => {
 
   const halfwayIndex = Math.ceil(data.length /2);
 
-  const itemHeight = 52;
+  const itemHeight = 50;
 
   const shuffleThreshold = halfwayIndex * itemHeight;
 
@@ -56,14 +56,14 @@ const Component = ({ data, leadingText }) => {
     <section className={styles.mainFrame}>
       <div className={ styles.outer_container }>
         <div className='row p-0'>
-          <div className={styles.content + ` col-6`}>
+          <div className={styles.content + ` col-12 col-md-6`}>
             <img
               src={data[activeIndex].content.image}
               alt={data[activeIndex].content.intro}
             />
             <p>{data[activeIndex].content.copy}</p>
           </div>
-          <div className={styles.carousel_wrapper + ' col-6'}>
+          <div className={styles.carousel_wrapper + ' col-12 col-md-6'}>
             <button
               type='button'
               className={styles.carousel_button}
@@ -78,6 +78,7 @@ const Component = ({ data, leadingText }) => {
               </div>
               <div className={styles.slides}>
                 <div className={styles.carousel_inner}>
+                  {console.log(halfwayIndex)}
                   {data.map((item, i) => (
                     <button
                       type="button"

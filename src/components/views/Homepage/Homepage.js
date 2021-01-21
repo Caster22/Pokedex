@@ -50,11 +50,27 @@ const mockData = [
     },
   },
   {
-    intro: 'introduction4',
+    intro: 'introduction6',
     id: 6,
     content: {
       image: pokemon,
       copy: 'lorem lorem ipsum ipsum6',
+    },
+  },
+  {
+    intro: 'introduction7',
+    id: 7,
+    content: {
+      image: pokemon,
+      copy: 'lorem lorem ipsum ipsum7',
+    },
+  },
+  {
+    intro: 'introduction8',
+    id: 8,
+    content: {
+      image: pokemon,
+      copy: 'lorem lorem ipsum ipsum8',
     },
   },
 ];
