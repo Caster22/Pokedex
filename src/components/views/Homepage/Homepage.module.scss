@@ -1,3 +1,10 @@
 .root {
 
 }
+
+.window {
+  background: linear-gradient(to bottom, darken(silver, 20%) 0%, lightgrey 15%, grey 30%, darken(grey, 30%) 100% );
+  height: 60vh;
+  border-radius: 25px;
+  position: relative;
+}
