@@ -6,10 +6,10 @@ import ArrowUp from '../../../img/sort-up.svg';
 import ArrowDown from '../../../img/sort-down.svg';
 
 
-const Component = ({ data, leadingText }) => {
+const Component = ({ leadingText, pokemons }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const halfwayIndex = Math.ceil(data.length /2);
+  const halfwayIndex = Math.ceil(pokemons.length /2);
 
   const itemHeight = 50;
 
@@ -17,16 +17,22 @@ const Component = ({ data, leadingText }) => {
 
   const visibilityStyleThreshold = shuffleThreshold /2;
 
+  const idCreator = idString => {
+    const newIdString = idString.substr(34, 10);
+    const goodId = newIdString.replace('/','');
+    return goodId;
+  };
+
   const handleClick = (direction) => {
     setActiveIndex((prevIndex) => {
       if (direction === 'prev') {
-        if (prevIndex + 1 > data.length - 1) {
+        if (prevIndex + 1 > pokemons.length - 1) {
           return 0;
         }
         return prevIndex + 1;
       }
       if (prevIndex - 1 < 0) {
-        return data.length -1;
+        return pokemons.length -1;
       }
       return prevIndex - 1;
     });
@@ -38,7 +44,7 @@ const Component = ({ data, leadingText }) => {
       if (activeIndex > (itemIndex - halfwayIndex)) {
         return (itemIndex - activeIndex) * itemHeight
       } else {
-        return -((data.length + activeIndex) - itemIndex) * itemHeight;
+        return -((pokemons.length + activeIndex) - itemIndex) * itemHeight;
       }
     }
     if (itemIndex > activeIndex) {
@@ -46,7 +52,7 @@ const Component = ({ data, leadingText }) => {
     }
     if (itemIndex < activeIndex) {
       if ((activeIndex - itemIndex) * itemHeight >= shuffleThreshold) {
-        return (data.length - (activeIndex - itemIndex)) * itemHeight;
+        return (pokemons.length - (activeIndex - itemIndex)) * itemHeight;
       }
       return -(activeIndex - itemIndex) * itemHeight;
     }
@@ -58,10 +64,10 @@ const Component = ({ data, leadingText }) => {
         <div className='row p-0'>
           <div className={styles.content + ` col-12 col-md-6`}>
             <img
-              src={data[activeIndex].content.image}
-              alt={data[activeIndex].content.intro}
+              src={pokemons[activeIndex].url}
+              alt={pokemons[activeIndex].url}
             />
-            <p>{data[activeIndex].content.copy}</p>
+            <p>{pokemons[activeIndex].name}</p>
           </div>
           <div className={styles.carousel_wrapper + ' col-12 col-md-6'}>
             <button
@@ -71,15 +77,13 @@ const Component = ({ data, leadingText }) => {
             >
               <img src={ArrowUp} alt='arUp'/>
             </button>
-
             <div className={styles.carousel}>
               <div className={styles.leadingText}>
-                <p>{leadingText}</p>
+                <p>-></p>
               </div>
               <div className={styles.slides}>
                 <div className={styles.carousel_inner}>
-                  {console.log(halfwayIndex)}
-                  {data.map((item, i) => (
+                  {pokemons.map((item, i) => (
                     <button
                       type="button"
                       onClick={() => setActiveIndex(i)}
@@ -87,10 +91,10 @@ const Component = ({ data, leadingText }) => {
                         active: activeIndex === i,
                         visible: Math.abs(determinePlacement(i)) <= visibilityStyleThreshold,
                       })}
-                      key={item.id}
+                      key={item.name}
                       style={{ transform: `translateY(${determinePlacement(i)}px)` }}
                     >
-                      {item.intro}
+                       {item.name}
                     </button>
                   ))}
                 </div>
@@ -108,8 +112,8 @@ const Component = ({ data, leadingText }) => {
         </div>
       </div>
       <div className={`text-center py-4 mt-5 ` + styles.title}>
-        <a href={`/pokemon/${data[activeIndex].intro}`}>
-          More info about {data[activeIndex].intro}
+        <a href={`/pokemon/${idCreator(pokemons[activeIndex].url)}`}>
+          More info about {pokemons[activeIndex].name}
         </a>
       </div>
     </section>
