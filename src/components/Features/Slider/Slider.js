@@ -2,44 +2,22 @@ import React from 'react';
 //import PropTypes from 'prop-types';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
-import placeholderImg from '../../../img/12.png';
+import styles from './Slider.module.scss';
 
 
 class Component extends React.Component {
   render() {
+    const { images } = this.props;
     return (
-      <Carousel>
+      <Carousel className={styles.wrapper}>
         <div>
-          <img src={placeholderImg} alt='img'/>
-          <span className='legend'> pokemon 1</span>
+          <img src={images.other.dream_world.front_default} alt='img'/>
         </div>
         <div>
-          <img src={placeholderImg} alt='img'/>
-          <span className='legend'> pokemon 2</span>
+          <img src={images.front_default} alt='img'/>
         </div>
         <div>
-          <img src={placeholderImg} alt='img'/>
-          <span className='legend'> pokemon 3</span>
-        </div>
-        <div>
-          <img src={placeholderImg} alt='img'/>
-          <span className='legend'> pokemon 4</span>
-        </div>
-        <div>
-          <img src={placeholderImg} alt='img'/>
-          <span className='legend'> pokemon 5</span>
-        </div>
-        <div>
-          <img src={placeholderImg} alt='img'/>
-          <span className='legend'> pokemon 6</span>
-        </div>
-        <div>
-          <img src={placeholderImg} alt='img'/>
-          <span className='legend'> pokemon 7</span>
-        </div>
-        <div>
-          <img src={placeholderImg} alt='img'/>
-          <span className='legend'> pokemon 8</span>
+          <img src={images.front_shiny} alt='img'/>
         </div>
       </Carousel>
     );
