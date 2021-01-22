@@ -3,21 +3,30 @@ import React from 'react';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 import styles from './Slider.module.scss';
+import placholderImg from '../../../img/NoImage.png';
+
+
 
 
 class Component extends React.Component {
+
+  imageCheck = (image) => {
+    if(!image) return placholderImg;
+    else return image;
+  }
+
   render() {
     const { images } = this.props;
     return (
       <Carousel className={styles.wrapper}>
         <div>
-          <img src={images.other.dream_world.front_default} alt='img'/>
+          <img src={this.imageCheck(images.other.dream_world.front_default)} alt='img'/>
         </div>
         <div>
-          <img src={images.front_default} alt='img'/>
+          <img src={this.imageCheck(images.front_default)} alt='img'/>
         </div>
         <div>
-          <img src={images.front_shiny} alt='img'/>
+          <img src={this.imageCheck(images.front_shiny)} alt='img'/>
         </div>
       </Carousel>
     );
