@@ -122,7 +122,7 @@ button {
   border: none;
   padding: 0 60px 0 0;
   margin: 0 60px 0 0;
-  top: 142px;
+  top: 105px;
   left: 20px;
   transition: transform 0.5s ease, opacity 0.5s ease-in-out;
   visibility: hidden;
@@ -147,15 +147,9 @@ button {
   }
 }
 
-@media (max-width: 1200px) {
-  .carouselItem {
-    top: 110px;
-  }
-}
-
 @media (max-width: 992px) {
   .carouselItem {
-    top: 103px;
+    top: 105px;
   }
 }
 

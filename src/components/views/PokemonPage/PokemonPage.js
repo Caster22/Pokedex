@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 //import PropTypes from 'prop-types';
 import styles from './PokemonPage.module.scss';
 import {Slider} from "../../Features/Slider/Slider";
-import placholderImg from "../../../img/NoImage.png";
 
 class Component extends React.Component {
   componentDidMount() {
@@ -29,7 +28,6 @@ class Component extends React.Component {
     } else {
       return (
         <section className='container'>
-          {console.log(pokemon)}
           <div className='container'>
             <div className={styles.window}>
               <h1 className='text-center pt-2 pb-4'>{ pokemon.name }</h1>

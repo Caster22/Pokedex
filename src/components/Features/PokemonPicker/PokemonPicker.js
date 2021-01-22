@@ -5,11 +5,39 @@ import styles from './PokemonPicker.module.scss'
 import ArrowUp from '../../../img/sort-up.svg';
 import ArrowDown from '../../../img/sort-down.svg';
 
-
-const Component = ({ leadingText, pokemons }) => {
+const Component = ({ pokemons }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [value, setValue] = useState('');
+  const [pokemonName, setPokemonName] = useState('');
+  const [pokemonId, setPokemonId] = useState('');
 
-  const halfwayIndex = Math.ceil(pokemons.length /2);
+  const filterPokemons = () => {
+    if (!value) return pokemons.length;
+    else return pokemons.filter(item => item.name.includes(value)).length;
+  };
+
+  const idSelector = () => {
+    if (!value) return pokemons[activeIndex].url;
+    else return pokemonId;
+  };
+  const nameSelector = () => {
+    if (!value) return pokemons[activeIndex].name;
+    else return pokemonName;
+  };
+
+  const selectDom = () => {
+    const element = document.getElementsByClassName('active');
+    if (!element[0]) return 'loading';
+    else {
+      const domObj = {
+        name: element[0].innerHTML,
+        id: element[0].value,
+      };
+      return domObj;
+    }
+  };
+
+  const halfwayIndex = Math.ceil(filterPokemons() /2);
 
   const itemHeight = 50;
 
@@ -24,15 +52,18 @@ const Component = ({ leadingText, pokemons }) => {
   };
 
   const handleClick = (direction) => {
+    const name = selectDom().name;
+    const id = selectDom().id;
+    if (value) { setPokemonName(name); setPokemonId(id);}
     setActiveIndex((prevIndex) => {
       if (direction === 'prev') {
-        if (prevIndex + 1 > pokemons.length - 1) {
+        if (prevIndex + 1 > filterPokemons() - 1) {
           return 0;
         }
         return prevIndex + 1;
       }
       if (prevIndex - 1 < 0) {
-        return pokemons.length -1;
+        return filterPokemons() -1;
       }
       return prevIndex - 1;
     });
@@ -44,7 +75,7 @@ const Component = ({ leadingText, pokemons }) => {
       if (activeIndex > (itemIndex - halfwayIndex)) {
         return (itemIndex - activeIndex) * itemHeight
       } else {
-        return -((pokemons.length + activeIndex) - itemIndex) * itemHeight;
+        return -((filterPokemons() + activeIndex) - itemIndex) * itemHeight;
       }
     }
     if (itemIndex > activeIndex) {
@@ -52,7 +83,7 @@ const Component = ({ leadingText, pokemons }) => {
     }
     if (itemIndex < activeIndex) {
       if ((activeIndex - itemIndex) * itemHeight >= shuffleThreshold) {
-        return (pokemons.length - (activeIndex - itemIndex)) * itemHeight;
+        return (filterPokemons() - (activeIndex - itemIndex)) * itemHeight;
       }
       return -(activeIndex - itemIndex) * itemHeight;
     }
@@ -60,16 +91,16 @@ const Component = ({ leadingText, pokemons }) => {
 
   return (
     <section className={styles.mainFrame}>
+      <input
+        type='text'
+        value={value}
+        onChange={e => setValue(e.target.value)}
+        placeholder='filter by name'
+      />
       <div className={ styles.outer_container }>
         <div className='row p-0'>
-          <div className={styles.content + ` col-12 col-md-6`}>
-            <img
-              src={pokemons[activeIndex].url}
-              alt={pokemons[activeIndex].url}
-            />
-            <p>{pokemons[activeIndex].name}</p>
-          </div>
-          <div className={styles.carousel_wrapper + ' col-12 col-md-6'}>
+
+          <div className={styles.carousel_wrapper + ' col-12'}>
             <button
               type='button'
               className={styles.carousel_button}
@@ -82,11 +113,22 @@ const Component = ({ leadingText, pokemons }) => {
                 <p>-></p>
               </div>
               <div className={styles.slides}>
+                {console.log('log:', pokemonName, pokemonId)}
+                {console.log('log2:', selectDom())}
                 <div className={styles.carousel_inner}>
-                  {pokemons.map((item, i) => (
+                  {pokemons.filter(item => {
+                    if (!value) return true;
+                    if (item.name.includes(value)) return true;
+                    return false;
+                  }).map((item, i) => (
                     <button
                       type="button"
-                      onClick={() => setActiveIndex(i)}
+                      value={item.url}
+                      onClick={() => {
+                        setActiveIndex(i);
+                        setPokemonName(item.name);
+                        setPokemonId(item.url);
+                      }}
                       className={cn(styles.carouselItem, {
                         active: activeIndex === i,
                         visible: Math.abs(determinePlacement(i)) <= visibilityStyleThreshold,
@@ -100,11 +142,12 @@ const Component = ({ leadingText, pokemons }) => {
                 </div>
               </div>
             </div>
-
             <button
               type='button'
               className={styles.carousel_button}
-              onClick={() => handleClick('prev')}
+              onClick={() => {
+                handleClick('prev');
+              }}
             >
               <img src={ArrowDown} alt='arDown'/>
             </button>
@@ -112,8 +155,8 @@ const Component = ({ leadingText, pokemons }) => {
         </div>
       </div>
       <div className={`text-center py-4 mt-5 ` + styles.title}>
-        <a href={`/pokemon/${idCreator(pokemons[activeIndex].url)}`}>
-          More info about {pokemons[activeIndex].name}
+        <a href={`/pokemon/${idCreator(idSelector())}`}>
+          More info about {nameSelector()}
         </a>
       </div>
     </section>
