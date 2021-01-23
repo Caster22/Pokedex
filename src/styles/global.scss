@@ -3,5 +3,7 @@
 body {
   background-color: $background;
   font-family: $title-font;
+  position: relative;
+  height: 100vh;
 }
 

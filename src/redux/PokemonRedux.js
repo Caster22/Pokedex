@@ -25,6 +25,7 @@ export const fetchAllPokemons = () => {
     const state = getState();
     if(!state.pokemons.data) {
       Axios
+        //in link below offset and limit can be changed for more control over list
         .get('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1200')
         .then(res => {
           dispatch(fetchSuccess(res.data));

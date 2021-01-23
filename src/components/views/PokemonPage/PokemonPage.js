@@ -1,7 +1,7 @@
 import React from 'react';
 import { fetchSelectedPokemon, getAllPokemons } from "../../../redux/PokemonRedux";
 import {connect} from "react-redux";
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styles from './PokemonPage.module.scss';
 import {Slider} from "../../Features/Slider/Slider";
 
@@ -65,6 +65,10 @@ class Component extends React.Component {
   }
 }
 
+Component.propTypes = {
+  pokemon: PropTypes.object,
+};
+
 const mapStateToProps = state => ({
   pokemon: getAllPokemons(state),
 });
@@ -75,6 +79,7 @@ const mapDispatchToProps = dispatch => ({
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
+//If need -> below easy way for switch container/component
 export {
   //Component as PokemonPage,
   Container as PokemonPage,

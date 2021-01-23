@@ -3,7 +3,6 @@
 .root {
   font-family: $title-font;
   background-color: $header-main;
-  //height: $base-size * 5;
   position: absolute;
   top: 0;
   width: 100%;
@@ -17,6 +16,7 @@
     text-decoration: none;
     color: $global-font-color;
     transition: $transition-color;
+    font-size: 25px;
     &:hover {
       color: $hover-color;
       transition: $transition-color;
@@ -29,6 +29,9 @@
 }
 
 .title {
-  color: $global-font-color;
   font-size: 40px;
+  a {
+    text-decoration: none;
+    color: $global-font-color;
+  }
 }

@@ -6,40 +6,18 @@ import ArrowUp from '../../../img/sort-up.svg';
 import ArrowDown from '../../../img/sort-down.svg';
 
 const Component = ({ pokemons }) => {
+
   const [activeIndex, setActiveIndex] = useState(0);
   const [value, setValue] = useState('');
-  const [pokemonName, setPokemonName] = useState('');
-  const [pokemonId, setPokemonId] = useState('');
 
   const filterPokemons = () => {
     if (!value) return pokemons.length;
     else return pokemons.filter(item => item.name.includes(value)).length;
   };
 
-  const idSelector = () => {
-    if (!value) return pokemons[activeIndex].url;
-    else return pokemonId;
-  };
-  const nameSelector = () => {
-    if (!value) return pokemons[activeIndex].name;
-    else return pokemonName;
-  };
-
-  const selectDom = () => {
-    const element = document.getElementsByClassName('active');
-    if (!element[0]) return 'loading';
-    else {
-      const domObj = {
-        name: element[0].innerHTML,
-        id: element[0].value,
-      };
-      return domObj;
-    }
-  };
-
   const halfwayIndex = Math.ceil(filterPokemons() /2);
 
-  const itemHeight = 50;
+  const itemHeight = 55;
 
   const shuffleThreshold = halfwayIndex * itemHeight;
 
@@ -52,9 +30,6 @@ const Component = ({ pokemons }) => {
   };
 
   const handleClick = (direction) => {
-    const name = selectDom().name;
-    const id = selectDom().id;
-    if (value) { setPokemonName(name); setPokemonId(id);}
     setActiveIndex((prevIndex) => {
       if (direction === 'prev') {
         if (prevIndex + 1 > filterPokemons() - 1) {
@@ -109,12 +84,7 @@ const Component = ({ pokemons }) => {
               <img src={ArrowUp} alt='arUp'/>
             </button>
             <div className={styles.carousel}>
-              <div className={styles.leadingText}>
-                <p>-></p>
-              </div>
               <div className={styles.slides}>
-                {console.log('log:', pokemonName, pokemonId)}
-                {console.log('log2:', selectDom())}
                 <div className={styles.carousel_inner}>
                   {pokemons.filter(item => {
                     if (!value) return true;
@@ -123,11 +93,8 @@ const Component = ({ pokemons }) => {
                   }).map((item, i) => (
                     <button
                       type="button"
-                      value={item.url}
                       onClick={() => {
                         setActiveIndex(i);
-                        setPokemonName(item.name);
-                        setPokemonId(item.url);
                       }}
                       className={cn(styles.carouselItem, {
                         active: activeIndex === i,
@@ -136,7 +103,7 @@ const Component = ({ pokemons }) => {
                       key={item.name}
                       style={{ transform: `translateY(${determinePlacement(i)}px)` }}
                     >
-                       {item.name}
+                      <a className='text-center' href={`/pokemon/${idCreator(item.url)}`}>{item.name}</a>
                     </button>
                   ))}
                 </div>
@@ -154,21 +121,15 @@ const Component = ({ pokemons }) => {
           </div>
         </div>
       </div>
-      <div className={`text-center py-4 mt-5 ` + styles.title}>
-        <a href={`/pokemon/${idCreator(idSelector())}`}>
-          More info about {nameSelector()}
-        </a>
-      </div>
     </section>
-
   );
 }
 
 Component.propTypes = {
-  data: PropTypes.array,
-  leadingText: PropTypes.string,
+  pokemons: PropTypes.array,
 };
 
+//If need -> below easy way for switch container/component
 export {
   Component as PokemonPicker,
   //Container as PokemonPicker,

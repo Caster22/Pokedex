@@ -1,5 +1,4 @@
 import React from 'react';
-//import PropTypes from 'prop-types';
 import styles from './Footer.module.scss';
 
 const Component = () => {
@@ -20,10 +19,6 @@ const Component = () => {
       </div>
     </footer>
   );
-};
-
-Component.propTypes = {
-
 };
 
 export {

@@ -1,5 +1,5 @@
 import React from 'react';
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 import styles from './Slider.module.scss';
@@ -32,6 +32,11 @@ class Component extends React.Component {
     );
   }
 }
+
+
+Component.propTypes = {
+  images: PropTypes.object,
+};
 
 export {
   Component as Slider,

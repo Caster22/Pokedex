@@ -1,0 +1,12 @@
+@import '../../../styles/settings.scss';
+
+.musicBtn {
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+  transition: $transition-color;
+  &:hover {
+    color: $hover-color;
+    transition: $transition-color;
+  }
+}
