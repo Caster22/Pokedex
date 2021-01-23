@@ -1,8 +1,8 @@
 @import '../../../styles/settings.scss';
 
 :root {
-  --white: #596275;
-  --orange: #f5cd79;
+  --white: $PickerDark;
+  --orange: $PickerLight;
 }
 
 button {
